@@ -5,8 +5,16 @@ const { check, validationResult } = require("express-validator/check");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const sgMail = require("@sendgrid/mail");
+const Nexmo = require("nexmo");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const User = require("../../models/User");
+const nexmo = new Nexmo(
+  {
+    apiKey: process.env.NEXMO_API_KEY,
+    apiSecret: process.env.NEXMO_API_SECRET
+  },
+  { debug: true }
+);
 
 // @route   GET api/auth
 // @desc    Test route
@@ -17,6 +25,29 @@ router.get("/", middleware, async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ msg: error });
+  }
+});
+
+// @route   GET api/auth/phone
+// @desc    Send SMS
+// @access  Public
+router.post("/phone", async (req, res) => {
+  try {
+    const { number, text } = req.body;
+    nexmo.message.sendSms(
+      "George",
+      number,
+      text,
+      { type: "unicode" },
+      (err, res) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.dir(res);
+      }
+    );
+  } catch (error) {
+    res.status(500).json({ msg: "Failure" });
   }
 });
 
