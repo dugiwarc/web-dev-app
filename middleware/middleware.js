@@ -17,8 +17,6 @@ module.exports = function(req, res, next) {
     return "";
   };
   const token = getTokenFromCookie();
-  console.log(req.headers);
-  console.log(token);
   if (!token) {
     return res.status(401).json({ msg: "No token, authorization denied" });
   }

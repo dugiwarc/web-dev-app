@@ -44,10 +44,11 @@ router.post("/phone", async (req, res) => {
           console.error(err);
         } else {
           console.dir(res);
+        }
       }
     );
-  } catch (error) {
-    res.status(500).json({ msg: "Failure" });
+  } catch (err) {
+    console.log(err);
   }
 });
 
