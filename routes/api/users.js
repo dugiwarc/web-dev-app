@@ -23,6 +23,7 @@ router.post(
     ).isLength({ min: 6 })
   ],
   async (req, res) => {
+    console.log("REGISTRATION ROUTE");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -65,7 +66,7 @@ router.post(
       jwt.sign(payload, process.env.JWT_SECRET, (error, token) => {
         if (error) throw error;
         res
-          .cookie("token", token, { httpOnly: true, maxAge: 30000 })
+          // .cookie("token", token, { httpOnly: true, maxAge: 30000 })
           .status(200)
           .json({ token });
       });

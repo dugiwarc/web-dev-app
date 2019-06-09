@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = function(req, res, next) {
   const getTokenFromCookie = () => {
-    const name = "token=";
+    const name = "devToken=";
     const decodedCookie = decodeURIComponent(req.headers.cookie);
     const ca = decodedCookie.split(";");
     for (let i = 0; i < ca.length; i++) {

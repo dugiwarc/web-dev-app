@@ -216,16 +216,13 @@ router.post(
           arr.push();
           res
             .header("Set-Cookie", [
-              `token=${token}; Expires=Fri, 26 Dec 2020 17:23:52 GMT; HttpOnly`,
+              `devToken=${token}; Expires=Fri, 26 Dec 2020 17:23:52 GMT; HttpOnly`,
               `location=Paris;Expires=Fri, 26 Dec 2010 17:23:52 GMT`,
               ` ;Expires=Fri, 26 Dec 2010 17:23:52 GMT`
             ])
-            // .cookie("token", token, {
-            //   httpOnly: true,
-            //   maxAge: 10000
-            // })
             .status(200)
             .json({ msg: "Logged In" });
+          console.log("Logged In");
         }
       );
     } catch (error) {
