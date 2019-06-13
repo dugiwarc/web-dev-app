@@ -131,7 +131,6 @@ router.put("/like/:id", middleware, async (req, res) => {
 // @desc    Comment on a post
 // @access  Public
 router.post("/comment/:id", middleware, async (req, res) => {
-  console.log("Here");
   try {
     const user = await User.findById(req.user.id).select("-password");
     const post = await Post.findById(req.params.id);
@@ -146,7 +145,7 @@ router.post("/comment/:id", middleware, async (req, res) => {
 
     await post.save();
 
-    res.json(post);
+    res.json(post.comments);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");

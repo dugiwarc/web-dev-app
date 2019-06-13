@@ -4,7 +4,11 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT,
+  CLEAR_PROFILE,
+  DELETE_ACCOUNT,
+  GET_REPOS
 } from "../actions/types";
 import Cookies from "universal-cookie";
 
@@ -43,12 +47,27 @@ export default function(state = initialState, action) {
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
+    case LOGOUT:
+    case DELETE_ACCOUNT:
       deleteCookies();
       return {
         ...state,
         ...payload,
         token: null,
         isAuthenticated: false,
+        loading: false
+      };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        repos: [],
+        loading: false
+      };
+    case GET_REPOS:
+      return {
+        ...state,
+        repos: payload,
         loading: false
       };
     default:

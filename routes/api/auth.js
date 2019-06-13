@@ -215,14 +215,13 @@ router.post(
           if (error) throw error;
           arr.push();
           res
-            .header("Set-Cookie", [
-              `devToken=${token}; Expires=Fri, 26 Dec 2020 17:23:52 GMT; HttpOnly`,
-              `location=Paris;Expires=Fri, 26 Dec 2010 17:23:52 GMT`,
-              ` ;Expires=Fri, 26 Dec 2010 17:23:52 GMT`
-            ])
+            // .header("Set-Cookie", [
+            //   `devToken=${token}; Expires=Fri, 26 Dec 2021 17:23:52 GMT, Path="/"`
+            //   // `location=Paris;Expires=Fri, 26 Dec 2010 17:23:52 GMT`,
+            // ])
             .status(200)
-            .json({ msg: "Logged In" });
-          console.log("Logged In");
+            .json({ token });
+          console.log("Headers:\n", res.header);
         }
       );
     } catch (error) {
