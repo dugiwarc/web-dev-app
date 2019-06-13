@@ -27,6 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.13",
     "nexmo": "^2.4.1",
+    "react-scripts": "^3.0.1",
     "request": "^2.88.0",
     "universal-cookie": "^4.0.0"
   },
