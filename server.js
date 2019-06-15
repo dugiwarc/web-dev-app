@@ -1,8 +1,35 @@
 require("dotenv").config();
 
 const express = require("express");
-const connectDB = require("./config/db");
+// const connectDB = require("./config/db");
 const app = express();
+var http = require("http");
+var server = http.createServer(app);
+const mongoose = require("mongoose");
+var io = require("socket.io")(http);
+
+// console.log(io);
+connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    });
+    console.log("MongoDB connected");
+    io.on("connection", async socket => {
+      try {
+        console.log("user connected");
+      } catch (error) {
+        console.log("not connected");
+      }
+    });
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
@@ -27,4 +54,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.PORT, () => console.log(`Server started`));
+server.listen(process.env.PORT, () => console.log(`Server started`));

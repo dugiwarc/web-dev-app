@@ -176,13 +176,12 @@ router.post(
     check("password", "Password is required").exists()
   ],
   async (req, res) => {
+    console.log("Login route reached");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     const { email, password } = req.body;
-    console.log("here");
     try {
       let user = await User.findOne({ email });
 
@@ -221,7 +220,6 @@ router.post(
             // ])
             .status(200)
             .json({ token });
-          console.log("Headers:\n", res.header);
         }
       );
     } catch (error) {
