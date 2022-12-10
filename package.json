@@ -20,7 +20,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-validator": "^5.3.1",
     "gravatar": "^1.8.0",
     "http-proxy-middleware": "^0.19.1",
